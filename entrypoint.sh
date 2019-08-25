@@ -11,7 +11,9 @@ then
     echo "PostgreSQL iniciado"
 fi
 
-python manage.py flush --no-input
+# No se hace flush porque solo afecta al schema public
+#python manage.py flush --no-input
+
 python manage.py migrate
 # En pruebas
 python manage.py collectstatic --no-input --clear
