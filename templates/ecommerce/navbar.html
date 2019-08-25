@@ -39,7 +39,7 @@
 						<a href="{% url 'ecommerce:order-summary' %}" class="nav-link waves-effect">
 							<span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
 							<i class="fas fa-shopping-cart"></i>
-							<span class="clearfix d-none d-sm-inline-block"> Cart </span>
+							<span class="clearfix d-none d-sm-inline-block"> Carrito </span>
 						</a>
 					</li>
 
@@ -50,7 +50,8 @@
 							<i class="fas fa-user"></i><span
 										class="d-none d-lg-inline-block ml-1">{{ request.user.username }} </span></a>
 						<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbar-tools">
-							<a class="dropdown-item" href="{% url 'account_logout' %}">Perfil</a>
+                            <a class="dropdown-item" href="{% url 'ecommerce:purchases' %}">Compras</a>
+							<a class="dropdown-item" href="#">Perfil</a>
 							<a class="dropdown-item" href="{% url 'account_logout' %}">Cerrar sesión</a>
 							{% comment %}<a class="dropdown-item" href="/cli/">Feature
 								<span class="badge badge-danger rounded">New</span></a>{% endcomment %}

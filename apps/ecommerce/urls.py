@@ -8,8 +8,6 @@ urlpatterns = [
     path('', core_views.HomeView.as_view(), name='home-ecommerce'),
     path('product/<slug>/', core_views.ItemDetailView.as_view(), name='product-ecommerce'),
 
-
-    # No testeadas aun
     path('checkout/', core_views.CheckoutView.as_view(), name='checkout'),
     path('order-summary/', core_views.OrderSummaryView.as_view(), name='order-summary'),
     path('add-to-cart/<slug>/', core_views.add_to_cart, name='add-to-cart'),
@@ -20,5 +18,6 @@ urlpatterns = [
          name='remove-single-item-from-cart'
          ),
     path('payment/<payment_option>/', core_views.PaymentView.as_view(), name='payment'),
-    path('request-refund/', core_views.RequestRefundView.as_view(), name='request-refund')
+    path('request-refund/', core_views.RequestRefundView.as_view(), name='request-refund'),
+    path('purchases/', core_views.PurchasesView.as_view(), name='purchases'),
 ]

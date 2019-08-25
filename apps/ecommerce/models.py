@@ -59,7 +59,7 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"{self.quantity} of {self.item.title}"
+        return f"Cantidad: {self.quantity} producto: {self.item.title}"
 
     def get_total_item_price(self):
         return self.quantity * self.item.price
@@ -138,7 +138,7 @@ class Address(models.Model):
 
 
 class Payment(models.Model):
-    stripe_charge_id = models.CharField(max_length=50)
+    stripe_charge_id = models.CharField(max_length=50, blank=True, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL, blank=True, null=True)
     amount = models.FloatField()
