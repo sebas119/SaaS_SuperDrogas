@@ -153,3 +153,18 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
         id_ = self.kwargs.get("id")
         return get_object_or_404(Item, id=id_)
+
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "administrador/account/update_product.html"
+    form_class = ItemsForm
+    queryset = Item.objects.all()
+    success_url = reverse_lazy('administrador:product-manager')
+
+    def get_object(self, queryset=None):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Item, id=id_)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)

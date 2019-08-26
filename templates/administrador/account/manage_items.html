@@ -36,6 +36,7 @@
 									<th>Precio</th>
 									<th>Precio en descuento</th>
 									<th>Categoria</th>
+									<th>Imagen</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -43,11 +44,22 @@
 									<tr>
 										<td>{{ forloop.counter }}</td>
 										<td>
-											{{ item.title }}
+											<a href="{% url 'administrador:update-product' item.id %}">
+												{{ item.title }}
+											</a>
 										</td>
 										<td>{{ item.price }}</td>
-										<td>{{ item.discount_price }}</td>
+										{% if item.discount_price %}
+											<td>{{ item.discount_price }}</td>
+										{% else %}
+											<td>--</td>
+										{% endif %}
 										<td>{{ item.get_category_display }}</td>
+										{% if item.image.name %}
+											<td><a href="{{ MEDIA_URL }}{{ item.image.url }}" target="_blank">{{ item.image.name }}</a></td>
+										{% else %}
+											<td>Sin imagen</td>
+										{% endif %}
 										<td>
 											<a href="{% url 'administrador:delete-product' item.id %}">
 												<button type="button"
