@@ -17,7 +17,7 @@ from django.urls import reverse_lazy
 from .models import (
     Role,
 )
-from apps.ecommerce.models import Item
+from apps.ecommerce.models import Item, Order
 
 # Django user model
 from django.contrib.auth.models import User
@@ -168,3 +168,12 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
+
+
+class BillView(LoginRequiredMixin, ListView):
+    paginate_by = 50
+    context_object_name = 'orders'
+    template_name = "administrador/account/manage_bill.html"
+
+    def get_queryset(self):
+        return Order.objects.all()

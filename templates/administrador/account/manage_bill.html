@@ -1,0 +1,89 @@
+{% extends "administrador/account/base.html" %}
+{% block head_title %}Facturas{% endblock head_title %}
+{% load crispy_forms_tags %}
+{% block inner %}
+
+	<!-- ============================================================== -->
+	<!-- Container fluid  -->
+	<!-- ============================================================== -->
+	<div class="container-fluid">
+		<!-- ============================================================== -->
+		<!-- Bread crumb and right sidebar toggle -->
+		<!-- ============================================================== -->
+		<div class="row page-titles">
+			<div class="col-md-6 col-8 align-self-center">
+				<h3 class="text-themecolor m-b-0 m-t-0">Tabla</h3>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'administrador:home' %}">Inicio</a></li>
+					<li class="breadcrumb-item active">Tabla</li>
+				</ol>
+			</div>
+			<div class="col-md-6 col-4 align-self-center">
+				<button class="right-side-toggle waves-effect waves-light btn-info btn-circle btn-sm pull-right m-l-10">
+					<i class="ti-settings text-white"></i></button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-block">
+						<h4 class="card-title">Facturas</h4>
+						<h6 class="card-subtitle"></h6>
+						<div class="table-responsive">
+							<table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list"
+										 data-page-size="10">
+								<thead>
+								<tr>
+									<th>Usuario</th>
+									<th>Costo</th>
+									<th>Ordenado</th>
+									<th>En entrega</th>
+									<th>Recibido</th>
+									<th>Dirección de compra</th>
+									<th>Dirección de destino</th>
+									<th>Articulos comprados</th>
+								</tr>
+								</thead>
+								<tbody>
+
+								{% for order in orders %}
+									<tr>
+										<td>{{ order.user.username }}</td>
+										<td>{{ order.payment.amount }}</td>
+										<td>{{ order.ordered }}</td>
+										<td>{{ order.being_delivered }}</td>
+										<td>{{ order.received }}</td>
+										<td>{{ order.shipping_address.street_address }}</td>
+										<td>{{ order.billing_address.street_address }}</td>
+										<td>
+											{% for items in order.items.all %}
+												{{ items }} <br>
+											{% endfor %}
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+								<tfoot>
+								<tr>
+									<td colspan="7">
+										<div class="text-right">
+											<ul class="pagination"></ul>
+										</div>
+									</td>
+								</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+
+{% endblock %}

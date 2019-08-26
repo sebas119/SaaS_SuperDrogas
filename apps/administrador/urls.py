@@ -18,4 +18,7 @@ urlpatterns = [
     path('create-product/', core_views.ProductCreateView.as_view(), name='create-product'),
     path('delete-product/<int:id>/', core_views.ProductDeleteView.as_view(), name='delete-product'),
     path('update-product/<int:id>/', core_views.ProductUpdateView.as_view(), name='update-product'),
+
+    # Bill Admin
+    path('bill-manager/', core_views.BillView.as_view(), name='bill-manager'),
 ]
