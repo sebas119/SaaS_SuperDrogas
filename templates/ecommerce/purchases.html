@@ -1,54 +1,58 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-    Compras
+	Compras
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Listado de clientes </h4>
-                        <hr>
-                        <div class="table-responsive">
-                            <table class="table table-bordered data-combine">
-                                <thead>
-                                <tr>
-                                    <th>Usuario</th>
-                                    <th>Costo</th>
-                                    <th>Ordenado</th>
-                                    <th>En entrega</th>
-                                    <th>Recibido</th>
-                                    <th>Dirección de compra</th>
-                                    <th>Dirección de destino</th>
-                                    <th>Articulos comprados</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for order in orders %}
-                                    <tr>
-                                        <td>{{ order.user.username }}</td>
-                                        <td>{{ order.payment.amount }}</td>
-                                        <td>{{ order.ordered }}</td>
-                                        <td>{{ order.being_delivered }}</td>
-                                        <td>{{ order.received }}</td>
-                                        <td>{{ order.shipping_address.street_address }}</td>
-                                        <td>{{ order.billing_address.street_address }}</td>
-                                        <td>
-                                            {% for items in order.items.all %}
-                                                {{ items }} <br>
-                                            {% endfor %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container-fluid mt-4 mb-5">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title text-center">Registro de compras realizadas</h4>
+						<hr>
+						<div class="table-responsive">
+							<table class="table table-bordered data-combine">
+								<thead>
+								<tr>
+									<th>Usuario</th>
+									<th>Costo</th>
+									<th>Ordenado</th>
+									<th>En entrega</th>
+									<th>Recibido</th>
+									<th>Dirección de compra</th>
+									<th>Dirección de destino</th>
+									<th>Articulos comprados</th>
+								</tr>
+								</thead>
+								<tbody>
+								{% for order in orders %}
+									<tr>
+										<td>{{ order.user.username }}</td>
+										<td>{{ order.payment.amount }}</td>
+										<td>{{ order.ordered }}</td>
+										<td>{{ order.being_delivered }}</td>
+										<td>{{ order.received }}</td>
+										<td>{{ order.shipping_address.street_address }}</td>
+										<td>{{ order.billing_address.street_address }}</td>
+										<td>
+											{% for items in order.items.all %}
+												<b>{{ forloop.counter }}.</b>
+												<b>Cantidad: </b>{{ items.get_quantity }}, <b>producto: </b>{{ items.get_item_title }}
+												{% if forloop.revcounter > 1 %}
+													<hr>
+												{% endif %}
+											{% endfor %}
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

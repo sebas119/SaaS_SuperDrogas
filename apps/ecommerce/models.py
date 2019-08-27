@@ -59,7 +59,13 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"Cantidad: {self.quantity} producto: {self.item.title}"
+        return f"Cantidad comprada: {self.quantity}, producto: {self.item.title}"
+
+    def get_quantity(self):
+        return self.quantity
+
+    def get_item_title(self):
+        return self.item.title
 
     def get_total_item_price(self):
         return self.quantity * self.item.price
@@ -164,4 +170,3 @@ class Refund(models.Model):
 
     def __str__(self):
         return f"{self.pk}"
-
